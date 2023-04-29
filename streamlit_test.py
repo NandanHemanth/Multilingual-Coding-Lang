@@ -8,7 +8,7 @@ st.markdown("<h1 style='text-align: center; font-size: 4em;'>Bit-Fiddler</h1>", 
 st.header("Your Multilingual Coding Playground :computer:\n")
 
 # Set up OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 model = "text-davinci-002"
 
 
@@ -32,48 +32,41 @@ choice = st.sidebar.selectbox("Select a tool:", menu)
 if choice == "Python IDE":
     st.subheader("Visual Learning")
     st.markdown("")
+    
+    prompt = st.text_area("Enter your prompt here")
+
+    # Make API request
+    if st.button("Generate text"):
+        model = "text-davinci-002"
+        response = openai.Completion.create(
+            engine=model,
+            prompt=prompt,
+            max_tokens=1000,
+        )
+        generated_text = response.choices[0].text
+        st.text(generated_text)
+
     if st.button("Run Visualization"):
         subprocess.run(["python", "graphviz_main.py"])
-    
-    if st.button("Give Prompt"):
-        st.markdown("---")
-        prompt = st.text_area("Enter your prompt here", height=150)
-        st.markdown("---")
-        if st.button("Generate Output"):
-            model = model
-            response = openai.Completion.create(
-                engine=model,
-                prompt=prompt,
-                max_tokens=1000,
-            )
-            generated_text = response.choices[0].text
-            st.markdown("---")
-            st.subheader("Generated Prompt:")
-            st.write(generated_text)
-            st.subheader("Generated Output:")
-            st.code(generated_text, language='python')
+
 
 
 if choice == "Julia IDE":
     st.subheader("Visual Learning")
     st.markdown("")
+    
+    prompt = st.text_area("Enter your prompt here")
+
+    # Make API request
+    if st.button("Generate text"):
+        model = "text-davinci-002"
+        response = openai.Completion.create(
+            engine=model,
+            prompt=prompt,
+            max_tokens=1000,
+        )
+        generated_text = response.choices[0].text
+        st.text(generated_text)
+
     if st.button("Run Visualization"):
         subprocess.run(["python", "graphviz_main.py"])
-
-    if st.button("Give Prompt"):
-        st.markdown("---")
-        prompt = st.text_area("Enter your prompt here", height=150)
-        st.markdown("---")
-        if st.button("Generate Output"):
-            model = model
-            response = openai.Completion.create(
-                engine=model,
-                prompt=prompt,
-                max_tokens=1000,
-            )
-            generated_text = response.choices[0].text
-            st.markdown("---")
-            st.subheader("Generated Prompt:")
-            st.write(generated_text)
-            st.subheader("Generated Output:")
-            st.code(generated_text, language='julia')
